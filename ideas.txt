@@ -1,0 +1,6 @@
+# fonction qui va supprimer un tetr sur la base de son nb (A, B, C, D, ...)
+void del_tetr(map, nb_tetr)
+
+Stocker row_actual et col_actual pour savoir si on pose le tetriminos suivant a droite ou en bas 
+
+nb tetr * 4 > sqrt suivant
