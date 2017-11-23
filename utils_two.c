@@ -6,7 +6,7 @@
 /*   By: aberneli <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/11/23 09:49:21 by aberneli     #+#   ##    ##    #+#       */
-/*   Updated: 2017/11/23 11:06:03 by aberneli    ###    #+. /#+    ###.fr     */
+/*   Updated: 2017/11/23 16:09:59 by aberneli    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -71,21 +71,9 @@ int		is_alpha(char c)
 	return (0);
 }
 
-t_map	md_update(t_map mdata, int mode)
+t_map	md_reset(t_map mdata)
 {
-	if (!mode)
-	{
-		mdata.x = 0;
-		mdata.y = 0;
-	}
-	else
-	{
-		mdata.x++;
-		if (mdata.x >= mdata.w)
-		{
-			mdata.y++;
-			mdata.x %= mdata.w;
-		}
-	}
+	mdata.x = 0;
+	mdata.y = 0;
 	return (mdata);
 }

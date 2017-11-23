@@ -6,7 +6,7 @@
 /*   By: aberneli <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/11/23 10:12:25 by aberneli     #+#   ##    ##    #+#       */
-/*   Updated: 2017/11/23 10:27:26 by aberneli    ###    #+. /#+    ###.fr     */
+/*   Updated: 2017/11/23 19:39:30 by aberneli    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -28,6 +28,7 @@ int		main(int argc, char *argv[])
 		ft_putstr("error\n");
 		exit(FAILURE);
 	}
+	close(file);
 	mapsize = 0;
 	map = ft_map(first, &mapsize);
 	ft_showit(map, mapsize);

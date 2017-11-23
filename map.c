@@ -6,14 +6,14 @@
 /*   By: aberneli <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/11/23 09:28:45 by aberneli     #+#   ##    ##    #+#       */
-/*   Updated: 2017/11/23 13:28:15 by aberneli    ###    #+. /#+    ###.fr     */
+/*   Updated: 2017/11/23 20:33:26 by aberneli    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-static int		ft_chkfill(t_tetr *t, t_map d, char *map)
+static char		*ft_chkfill(t_tetr *t, t_map d, char *map)
 {
 	int			c;
 
@@ -21,9 +21,15 @@ static int		ft_chkfill(t_tetr *t, t_map d, char *map)
 	while (c < 4)
 	{
 		if (t->x[c] + d.x < 0 || t->x[c] + d.x >= d.w || t->y[c] + d.y >= d.w)
-			return (0);
+		{
+			return (NULL);
+			free(map);
+		}
 		if (map[(d.x + t->x[c]) + (d.y + t->y[c]) * d.w] != '.')
-			return (0);
+		{
+			free(map);
+			return (NULL);
+		}
 		c++;
 	}
 	c = 0;
@@ -32,7 +38,7 @@ static int		ft_chkfill(t_tetr *t, t_map d, char *map)
 		map[(d.x + t->x[c]) + (d.y + t->y[c]) * d.w] = t->nb + 'A' - 1;
 		c++;
 	}
-	return (1);
+	return (map);
 }
 
 static char		*ft_recur(t_tetr *t, t_map m_data, char *map)
@@ -46,10 +52,18 @@ static char		*ft_recur(t_tetr *t, t_map m_data, char *map)
 		free(map);
 		return (res);
 	}
-	if (ft_chkfill(t, m_data, map))
-		res = ft_recur(t->next, md_update(m_data, 0), ft_strdup(map));
+	if ((res = ft_chkfill(t, m_data, ft_strdup(map))) > 0)
+		res = ft_recur(t->next, md_reset(m_data), res);
 	if (1 + m_data.x + m_data.y * m_data.w < m_data.w * m_data.w && !res)
-		res = ft_recur(t, md_update(m_data, 1), ft_strdup(map));
+	{
+		m_data.x++;
+		if (m_data.x >= m_data.w)
+		{
+			m_data.y++;
+			m_data.x %= m_data.w;
+		}
+		res = ft_recur(t, m_data, ft_strdup(map));
+	}
 	free(map);
 	return (res);
 }
@@ -73,7 +87,6 @@ static char		*ft_backtrack(t_tetr *t, t_map map_data)
 	char		*res;
 
 	res = NULL;
-	write(1, "OK\n", 3);
 	map = (char *)malloc(map_data.w * map_data.w + 1);
 	ft_filldot(&map, map_data.w);
 	if (!(res = ft_recur(t, map_data, ft_strdup(map))))

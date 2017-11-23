@@ -6,7 +6,7 @@
 /*   By: grosnet- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/08 13:49:29 by grosnet-          #+#    #+#             */
-/*   Updated: 2017/11/21 13:53:53 by grosnet-         ###   ########.fr       */
+/*   Updated: 2017/11/23 20:29:24 by aberneli    ###    #+. /#+    ###.fr     */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_tetr	*check_file(int file)
 			node = node->next;
 		}
 		else
-			node = make_tetr(buf, 'A');
+			node = make_tetr(buf, 0);
 		if (!begin)
 			begin = node;
 	}
