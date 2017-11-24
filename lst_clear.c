@@ -1,38 +1,27 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   fillit.c                                         .::    .:/ .      .::   */
+/*   lst_clear.c                                      .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: aberneli <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2017/11/23 10:12:25 by aberneli     #+#   ##    ##    #+#       */
-/*   Updated: 2017/11/24 08:52:47 by aberneli    ###    #+. /#+    ###.fr     */
+/*   Created: 2017/11/24 08:50:29 by aberneli     #+#   ##    ##    #+#       */
+/*   Updated: 2017/11/24 08:52:03 by aberneli    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int		main(int argc, char *argv[])
+void		lst_clear(t_tetr *lst)
 {
-	int		file;
-	t_tetr	*first;
-	char	*map;
-	int		mapsize;
+	t_tetr	*tmp;
 
-	if (argc != 2)
-		usage();
-	file = open(argv[1], 'r');
-	if (!file || !(first = check_file(file)))
+	tmp = lst;
+	while (tmp)
 	{
-		ft_putstr("error\n");
-		exit(FAILURE);
+		lst = tmp->next;
+		free(tmp);
+		tmp = lst;
 	}
-	close(file);
-	mapsize = 0;
-	map = ft_map(first, &mapsize);
-	lst_clear(first);
-	ft_showit(map, mapsize);
-	free(map);
-	return (SUCCESS);
 }

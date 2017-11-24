@@ -6,7 +6,7 @@
 /*   By: aberneli <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/11/23 09:44:43 by aberneli     #+#   ##    ##    #+#       */
-/*   Updated: 2017/11/23 16:09:52 by aberneli    ###    #+. /#+    ###.fr     */
+/*   Updated: 2017/11/24 09:09:58 by aberneli    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -37,9 +37,6 @@ char	*ft_map(t_tetr *t, int *s);
 t_map	md_reset(t_map mdata);
 void	ft_showit(char *map, int mapsize);
 int		is_alpha(char c);
-int		check_block(char *block);
-int		check_tetr(char *block);
-t_tetr	*make_tetr(char *block, char nb);
-t_tetr	*beautify_tetr(t_tetr *tetr);
+void	lst_clear(t_tetr *lst);
 
 #endif
