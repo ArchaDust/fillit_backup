@@ -1,13 +1,14 @@
 /* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   confirmity.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: grosnet- <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/08 13:49:29 by grosnet-          #+#    #+#             */
-/*   Updated: 2017/11/24 09:21:54 by aberneli    ###    #+. /#+    ###.fr     */
-/*                                                                            */
+/*                                                          LE - /            */
+/*                                                              /             */
+/*   conformity.c                                     .::    .:/ .      .::   */
+/*                                                 +:+:+   +:    +:  +:+:+    */
+/*   By: aberneli <marvin@le-101.fr>                +:+   +:    +:    +:+     */
+/*                                                 #+#   #+    #+    #+#      */
+/*   Created: 2017/11/27 09:29:15 by aberneli     #+#   ##    ##    #+#       */
+/*   Updated: 2017/11/27 09:29:32 by aberneli    ###    #+. /#+    ###.fr     */
+/*                                                         /                  */
+/*                                                        /                   */
 /* ************************************************************************** */
 
 #include "fillit.h"
@@ -104,7 +105,7 @@ static t_tetr	*make_tetr(char *block, char nb)
 	return (beautify_tetr(new));
 }
 
-t_tetr		*check_file(int file)
+t_tetr			*check_file(int file)
 {
 	char	buf[BUF_SIZE];
 	t_tetr	*begin;

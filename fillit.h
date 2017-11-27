@@ -6,7 +6,7 @@
 /*   By: aberneli <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/11/23 09:44:43 by aberneli     #+#   ##    ##    #+#       */
-/*   Updated: 2017/11/24 09:09:58 by aberneli    ###    #+. /#+    ###.fr     */
+/*   Updated: 2017/11/24 11:34:32 by aberneli    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -38,5 +38,7 @@ t_map	md_reset(t_map mdata);
 void	ft_showit(char *map, int mapsize);
 int		is_alpha(char c);
 void	lst_clear(t_tetr *lst);
+void	ft_step(t_map *m);
+void	ft_backup(t_tetr *t, t_map *m, int tmp);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: aberneli <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/11/23 10:12:25 by aberneli     #+#   ##    ##    #+#       */
-/*   Updated: 2017/11/24 08:52:47 by aberneli    ###    #+. /#+    ###.fr     */
+/*   Updated: 2017/11/24 11:35:13 by aberneli    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -22,7 +22,7 @@ int		main(int argc, char *argv[])
 
 	if (argc != 2)
 		usage();
-	file = open(argv[1], 'r');
+	file = open(argv[1], 0);
 	if (!file || !(first = check_file(file)))
 	{
 		ft_putstr("error\n");

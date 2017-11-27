@@ -1,33 +1,38 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   types.h                                          .::    .:/ .      .::   */
+/*   utils_three.c                                    .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: aberneli <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2017/11/27 09:29:05 by aberneli     #+#   ##    ##    #+#       */
-/*   Updated: 2017/11/27 09:29:07 by aberneli    ###    #+. /#+    ###.fr     */
+/*   Created: 2017/11/24 11:16:23 by aberneli     #+#   ##    ##    #+#       */
+/*   Updated: 2017/11/27 09:09:47 by aberneli    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#ifndef TYPES_H
-# define TYPES_H
+#include "fillit.h"
 
-typedef struct		s_tetr
+void		ft_step(t_map *m)
 {
-	char			x[4];
-	char			y[4];
-	char			nb;
-	struct s_tetr	*next;
-}					t_tetr;
+	m->x++;
+	if (m->x > m->w)
+	{
+		m->x = 0;
+		m->y++;
+	}
+}
 
-typedef struct		s_map
+void		ft_backup(t_tetr *t, t_map *m, int tmp)
 {
-	char			*res;
-	int				x;
-	int				y;
-	int				w;
-}					t_map;
+	int		c;
 
-#endif
+	c = 0;
+	m->x = tmp % m->w;
+	m->y = tmp / m->w;
+	while (c < 4)
+	{
+		m->res[tmp + t->x[c] + t->y[c] * m->w] = '.';
+		c++;
+	}
+}
