@@ -6,7 +6,7 @@
 /*   By: aberneli <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/11/23 09:28:45 by aberneli     #+#   ##    ##    #+#       */
-/*   Updated: 2017/11/27 18:19:53 by aberneli    ###    #+. /#+    ###.fr     */
+/*   Updated: 2017/11/28 16:14:19 by aberneli    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -33,7 +33,7 @@ static int		ft_chkfill(t_tetr *t, t_map *d)
 	c = 0;
 	while (c < 4)
 	{
-		d->res[tmp + t->x[c] + t->y[c] * d->w] = t->nb + 'A' - 1;
+		d->res[tmp + t->x[c] + t->y[c] * d->w] = (char)t->nb;
 		c++;
 	}
 	return (1);
