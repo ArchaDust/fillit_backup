@@ -6,7 +6,7 @@
 /*   By: aberneli <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/11/27 09:29:15 by aberneli     #+#   ##    ##    #+#       */
-/*   Updated: 2017/11/27 09:29:32 by aberneli    ###    #+. /#+    ###.fr     */
+/*   Updated: 2017/11/28 16:17:27 by aberneli    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -113,6 +113,7 @@ t_tetr			*check_file(int file)
 	int		read_size;
 	int		prev_size;
 
+	node = NULL;
 	while ((read_size = read(file, buf, BUF_SIZE)) && read_size > 0)
 	{
 		prev_size = read_size;
@@ -124,7 +125,7 @@ t_tetr			*check_file(int file)
 			node = node->next;
 		}
 		else
-			node = make_tetr(buf, 0);
+			node = make_tetr(buf, 65);
 		if (!begin)
 			begin = node;
 	}
