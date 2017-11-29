@@ -6,25 +6,25 @@
 /*   By: aberneli <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/11/23 09:28:45 by aberneli     #+#   ##    ##    #+#       */
-/*   Updated: 2017/11/27 09:07:57 by aberneli    ###    #+. /#+    ###.fr     */
+/*   Updated: 2017/11/29 11:16:51 by aberneli    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-static int		ft_chkfill(t_tetr *t, t_map *d)
+static int		ft_chkfill(t_tetr *t, t_map *d, int x, int y)
 {
 	int			tmp;
 	int			c;
 
-	tmp = d->x + d->y * d->w;
+	tmp = x + y * d->w;
 	c = 0;
 	while (c < 4)
 	{
-		if (t->x[c] + d->x < 0 || t->x[c] + d->x >= d->w)
+		if (t->x[c] + x < 0 || t->x[c] + x >= d->w)
 			return (0);
-		if (t->y[c] + d->y >= d->w)
+		if (t->y[c] + y >= d->w)
 			return (0);
 		if (d->res[tmp + t->x[c] + t->y[c] * d->w] != '.')
 			return (0);
@@ -39,29 +39,31 @@ static int		ft_chkfill(t_tetr *t, t_map *d)
 	return (1);
 }
 
-static int		ft_recur(t_tetr *t, t_map *m_data)
+static int		ft_recur(t_tetr *t, t_map *m)
 {
-	int			res;
-	int			tmp;
+	int			x;
+	int			y;
 
-	tmp = 0;
-	res = 0;
 	if (!t)
 		return (1);
-	if ((ft_chkfill(t, m_data)))
+	y = 0;
+	while (y < m->w - t->h + 1)
 	{
-		tmp = m_data->x + m_data->y * m_data->w;
-		m_data->x = 0;
-		m_data->y = 0;
-		if (!(res = ft_recur(t->next, m_data)))
-			ft_backup(t, m_data, tmp);
+		x = 0;
+		while (x < m->w - t->w + 1)
+		{
+			if (ft_chkfill(t, m, x, y))
+			{
+				if (ft_recur(t->next, m))
+					return (1);
+				else
+					ft_backup(t, m, x, y);
+			}
+			x++;
+		}
+		y++;
 	}
-	if (1 + m_data->x + m_data->y * m_data->w < m_data->w * m_data->w && !res)
-	{
-		ft_step(m_data);
-		res = ft_recur(t, m_data);
-	}
-	return (res);
+	return (0);
 }
 
 static void		ft_filldot(char **s, int w)
@@ -77,11 +79,15 @@ static void		ft_filldot(char **s, int w)
 	s[0][i] = '\0';
 }
 
-static int		ft_backtrack(t_tetr *t, t_map *map_data)
+static t_map	*prepmap(int size)
 {
-	if (!(ft_recur(t, map_data)))
-		return (0);
-	return (1);
+	t_map		*m;
+
+	m = (t_map *)malloc(sizeof(t_map));
+	m->w = ft_nextsqr(size * 4);
+	m->res = (char *)malloc(m->w * m->w + 1);
+	ft_filldot(&m->res, m->w);
+	return (m);
 }
 
 char			*ft_map(t_tetr *t, int *s)
@@ -89,17 +95,11 @@ char			*ft_map(t_tetr *t, int *s)
 	t_map		*map_data;
 	char		*res;
 
-	map_data = (t_map *)malloc(sizeof(t_map));
-	map_data->x = 0;
-	map_data->y = 0;
-	map_data->w = ft_nextsqr(ft_list_size(t) * 4);
-	map_data->res = (char *)malloc(map_data->w * map_data->w + 1);
-	ft_filldot(&map_data->res, map_data->w);
-	while (!(ft_backtrack(t, map_data)))
+	calc_width(t);
+	map_data = prepmap(ft_list_size(t));
+	while (!(ft_recur(t, map_data)))
 	{
 		map_data->w++;
-		map_data->x = 0;
-		map_data->y = 0;
 		free(map_data->res);
 		map_data->res = (char *)malloc(map_data->w * map_data->w + 1);
 		ft_filldot(&map_data->res, map_data->w);

@@ -6,7 +6,7 @@
 /*   By: aberneli <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/11/23 09:49:21 by aberneli     #+#   ##    ##    #+#       */
-/*   Updated: 2017/11/23 16:09:59 by aberneli    ###    #+. /#+    ###.fr     */
+/*   Updated: 2017/11/29 11:11:27 by aberneli    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -69,11 +69,4 @@ int		is_alpha(char c)
 	if (c >= 'A' && c <= 'Z')
 		return (1);
 	return (0);
-}
-
-t_map	md_reset(t_map mdata)
-{
-	mdata.x = 0;
-	mdata.y = 0;
-	return (mdata);
 }

@@ -6,33 +6,42 @@
 /*   By: aberneli <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/11/24 11:16:23 by aberneli     #+#   ##    ##    #+#       */
-/*   Updated: 2017/11/27 09:09:47 by aberneli    ###    #+. /#+    ###.fr     */
+/*   Updated: 2017/11/29 11:11:14 by aberneli    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-void		ft_step(t_map *m)
-{
-	m->x++;
-	if (m->x > m->w)
-	{
-		m->x = 0;
-		m->y++;
-	}
-}
-
-void		ft_backup(t_tetr *t, t_map *m, int tmp)
+void		ft_backup(t_tetr *t, t_map *m, int x, int y)
 {
 	int		c;
 
 	c = 0;
-	m->x = tmp % m->w;
-	m->y = tmp / m->w;
 	while (c < 4)
 	{
-		m->res[tmp + t->x[c] + t->y[c] * m->w] = '.';
+		m->res[x + t->x[c] + (t->y[c] + y) * m->w] = '.';
 		c++;
+	}
+}
+
+void		calc_width(t_tetr *t)
+{
+	int		i;
+	int		max;
+
+	while (t)
+	{
+		i = 0;
+		max = 0;
+		while (i < 4)
+		{
+			if (t->x[i] > max)
+				max = t->x[i];
+			i++;
+		}
+		t->w = max;
+		t->h = t->y[3];
+		t = t->next;
 	}
 }
